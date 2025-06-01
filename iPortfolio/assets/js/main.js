@@ -185,6 +185,8 @@
           AOS.refresh()
         });
       }, true);
+
+      
     }
 
   });
@@ -200,6 +202,62 @@
    * Portfolio details slider
    */
   new Swiper('.portfolio-details-slider', {
+    speed: 400,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    }
+  });
+
+  /**
+   
+  /**
+   * certificado isotope and filter
+   */
+  window.addEventListener('load', () => {
+    let certificadoContainer = select('.certificado-container');
+    if (certificadoContainer) {
+      let certificadoIsotope = new Isotope(certificadoContainer, {
+        itemSelector: '.certificado-item'
+      });
+
+      let certificadoFilters = select('#certificado-flters li', true);
+
+      on('click', '#certificado-flters li', function(e) {
+        e.preventDefault();
+        certificadoFilters.forEach(function(el) {
+          el.classList.remove('filter-active');
+        });
+        this.classList.add('filter-active');
+
+        certificadoIsotope.arrange({
+          filter: this.getAttribute('data-filter')
+        });
+        certificadotope.on('arrangeComplete', function() {
+          AOS.refresh()
+        });
+      }, true);
+    }
+
+  });
+
+  /**
+   * Initiate certificado lightbox 
+   */
+  const certificadoLightbox = GLightbox({
+    selector: '.certificado-lightbox'
+  });
+
+  /**
+   * certificado details slider
+   */
+  new Swiper('.certificado-details-slider', {
     speed: 400,
     loop: true,
     autoplay: {
